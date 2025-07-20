@@ -10,7 +10,7 @@
                         {{ $article->created_at->diffForHumans() }}
                     </div>
                     <p>{{ $article->body }}</p>
-                    <a href="{{ url("/articles/details/$article->id") }}" class="card-link">View Detail</a>
+                    <a href="{{ url("/articles/detail/$article->id") }}" class="card-link">View Detail</a>
                 </div>
             </div>
         @endforeach

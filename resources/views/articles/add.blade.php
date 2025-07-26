@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container" style="max-width: 600px">
+        @if ($errors->any())
+            <div class="alert alert-warning">
+                @foreach ($errors->all() as $err)
+                    {{ $err }}
+                @endforeach
+            </div>
+        @endif
         <form action="{{ url('/articles/create')}}" method="post">  
             @csrf
             <input type="text" name="title" placeholder="Title" class="form-control mb-2">

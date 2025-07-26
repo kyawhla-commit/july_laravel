@@ -18,7 +18,7 @@
                 <option value="2">Tech</option>
             </select>
             <a href="{{ url('/articles')}}" class="btn btn-secondary">back</a>
-            <button class="btn btn-primary">Add</button>
+            <button class="btn btn-primary">Add Article</button>
         </form>
     </div>
 @endsection

@@ -21,6 +21,20 @@ class ArticleController extends Controller
             'article' => $article,
         ]);
     }
+    public function add() {
+        return view('articles/add');
+    }
+
+    public function create() {
+        $article = new Article;
+
+        $article->title = request()->title;
+        $article->body = request()->body;
+        $article->category_id = request()->category_id;
+        $article->save();
+
+        return redirect('/articles');
+    }
 
     public function delete($id) {
         $article = Article::find($id);

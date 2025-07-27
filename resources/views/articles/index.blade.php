@@ -7,7 +7,7 @@
 
         @if (session('info'))
             <div class="alert alert-info">
-                {{ session('info')}}
+                {{ session('info') }}
             </div>
         @endif
 
@@ -16,6 +16,8 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ $article->title }}</h4>
                     <div class="text-muted">
+                        <b class="text-info">Category:</b> {{ $article->category->name }},
+                        <b class="text-success">Comments:</b> {{ count($article->comments) }},
                         {{ $article->created_at->diffForHumans() }}
                     </div>
                     <p>{{ $article->body }}</p>

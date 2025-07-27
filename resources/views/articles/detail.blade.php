@@ -23,9 +23,16 @@
             </li>
             @foreach ($article->comments as $comment)
                 <li class="list-group-item">
+                    <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end"></a>
                     {{ $comment->content }}
                 </li>
             @endforeach
         </ul>
+        <form action="{{ url('/comments/add') }}" method="post">
+            @csrf
+            <input type="hidden" name="article_id" value="{{ $article->id }}">
+            <textarea name="content"  class="form-control my-2"></textarea>
+            <button class="btn btn-secondary">Add Comment</button>
+        </form>
     </div>
 @endsection

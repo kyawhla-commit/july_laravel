@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -27,10 +29,15 @@ class ArticleController extends Controller
         ]);
     }
     public function add() {
-        return view('articles/add');
+        $category = Category::all();
+
+        return view('articles/add', [
+            "categories" => $category
+        ]);
     }
 
-    public function create() {
+    public function create()
+    {
         $validator = validator(request()->all(), [
             "title" => "required",
             "body" => "required",
@@ -42,41 +49,24 @@ class ArticleController extends Controller
         }
 
         $article = new Article;
-
         $article->title = request()->title;
         $article->body = request()->body;
         $article->category_id = request()->category_id;
+         $article->user_id = Auth::id();
         $article->save();
 
-        return redirect('/articles');
+        return redirect("/articles");
     }
     public function edit($id) {
 
         $article = Article::find($id);
+        $categories = Category::all();
 
         return view("/articles/edit" ,[
-            "article" => $article
-            ]
-        );
+            "article" => $article,
+            "categories" => $categories,
+        ]);
     }
-    // public function update($id) {
-    //     $validator = validator(request()->all(), [
-    //         "title" => "required",
-    //         "body" => "required",
-    //         "category_id" => "required",
-    //     ]);
-
-    //     if($validator->fails()) {
-    //         return back()->withErrors($validator);
-    //     }
-    //     $article = Article::find($id);
-    //     $article->title = request()->title;
-    //     $article->body = request()->body;
-    //     $article->category_id = request()->category_id;
-    //     $article->save();
-
-    //     return redirect('/articles/deatil/$id');
-    // }
      public function update($id)
     {
         $validator = validator(request()->all(), [

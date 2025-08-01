@@ -50,6 +50,54 @@ class ArticleController extends Controller
 
         return redirect('/articles');
     }
+    public function edit($id) {
+
+        $article = Article::find($id);
+
+        return view("/articles/edit" ,[
+            "article" => $article
+            ]
+        );
+    }
+    // public function update($id) {
+    //     $validator = validator(request()->all(), [
+    //         "title" => "required",
+    //         "body" => "required",
+    //         "category_id" => "required",
+    //     ]);
+
+    //     if($validator->fails()) {
+    //         return back()->withErrors($validator);
+    //     }
+    //     $article = Article::find($id);
+    //     $article->title = request()->title;
+    //     $article->body = request()->body;
+    //     $article->category_id = request()->category_id;
+    //     $article->save();
+
+    //     return redirect('/articles/deatil/$id');
+    // }
+     public function update($id)
+    {
+        $validator = validator(request()->all(), [
+            "title" => "required",
+            "body" => "required",
+            "category_id" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $article = Article::find($id);
+        $article->title = request()->title;
+        $article->body = request()->body;
+        $article->category_id = request()->category_id;
+        $article->save();
+
+        return redirect("/articles/detail/$id");
+    }
+
 
     public function delete($id) {
         $article = Article::find($id);

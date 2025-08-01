@@ -14,6 +14,7 @@
                 <p>{{ $article->body }}</p>
                 <a href="{{ url('/articles/') }}" class="btn btn-outline-info">Back</a>
                 <a href="{{ url("/articles/delete/$article->id") }}" class="btn btn-outline-danger">Delete</a>
+                <a href="{{ url("/articles/edit/$article->id") }}" class="btn btn-outline-secondary">Edit</a>
             </div>
         </div>
 

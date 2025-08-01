@@ -18,5 +18,7 @@ Auth::routes();
 
 Route::post('/comments/add', [CommentController::class, 'create']);
 Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
+Route::post('/comments/update/', [CommentController::class, 'update']);
+Route::get('/comments/edit/{id}', [CommentController::class, 'delete']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

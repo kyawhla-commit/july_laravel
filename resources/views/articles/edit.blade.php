@@ -22,7 +22,7 @@
                     </option>
                 @endforeach
             </select>
-            <a href="{{ url('/articles')}}" class="btn btn-secondary">back</a>
+            <a href="{{ url("/articles/detail/$article->id")}}" class="btn btn-secondary">back</a>
             <button class="btn btn-primary">Update</button>
         </form>
     </div>

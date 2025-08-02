@@ -7,6 +7,7 @@
             <div class="card-body">
                 <h4 class="card-title">{{ $article->title }}</h4>
                 <div class="text-muted">
+                     <b class="text-primary">{{ $article->user->name }}</b>
                     <b class="text-info">Category:</b> {{ $article->category->name }},
                     <b>Comments:</b> {{ count($article->comments) }},
                     {{ $article->created_at->diffForHumans() }}
@@ -20,11 +21,14 @@
 
         <ul class="list-group mt-4">
             <li class="list-group-item active">
+                   
                 Comments ({{ count($article->comments) }})
             </li>
             @foreach ($article->comments as $comment)
                 <li class="list-group-item">
+                     
                     <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end"></a>
+                    <b class="text-primary">{{ $comment->user->name }}</b> - 
                     {{ $comment->content }}
                 </li>
             @endforeach

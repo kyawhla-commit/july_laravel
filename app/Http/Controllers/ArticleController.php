@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
@@ -92,8 +93,12 @@ class ArticleController extends Controller
     public function delete($id) {
         $article = Article::find($id);
 
-        $article->delete();
+        if(Gate::allows("delete-article", $article )){
+            $article->delete();
 
         return redirect('/articles')->with('info', "An article deleted");
+        }else {
+            return back()->with("info" , "Unauthorized action");
+        };
     }
 }

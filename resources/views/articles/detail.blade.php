@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="container" style="max-width:800px">
-
+        @if (session("info"))
+            <div class="alert alert-info">
+                {{ session("info")}}
+            </div>
+        @endif
         <div class="card mb-2 border-primary">
             <div class="card-body">
                 <h4 class="card-title">{{ $article->title }}</h4>

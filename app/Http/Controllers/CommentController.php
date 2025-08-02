@@ -13,7 +13,8 @@ class CommentController extends Controller
     {
         $this->middleware('auth');
     }
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $request->validate([
             'content' => 'required',
             'article_id' => 'required'
@@ -23,17 +24,17 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->user_id = Auth::id();
         $comment->save();
-        
+
         return back();
     }
 
     public function delete($id)
     {
         $comment = Comment::find($id);
-        if(Gate::allows("delete-comment", $comment)) {
+        if (Gate::allows("delete-comment", $comment)) {
             $comment->delete();
 
-        return back();
+            return back();
         } else {
             return back()->with("info", "Unauthorized action");
         }
